@@ -33,12 +33,13 @@ const game = {
     reset() {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
+        this.enemies = new Enemies(this.ctx, this.width, this.height)
 
     },
     drawAll() {
         this.background.draw();
         this.player.draw();
-        this.obstacles.drawBlack();
+        this.enemies.draw();
     },
     moveAll() {
         this.player.move();
