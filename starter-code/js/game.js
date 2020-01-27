@@ -6,11 +6,11 @@ const game = {
     version: '1.0',
     canvas: undefined,
     ctx: undefined,
-    fps: 50,
+    fps: 60,
     keys: {
         left: 37,
-        rigth: 39,
-        // space: 32
+        right: 39,
+        space: 32
     },
 
     init() {
@@ -26,7 +26,6 @@ const game = {
         this.reset();
         this.interval = setInterval(() => {
             this.drawAll();
-            this.moveAll();
 
         }, 1000 / this.fps)
     },

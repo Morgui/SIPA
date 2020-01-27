@@ -10,7 +10,6 @@ class Enemies {
     }
 
     draw() {
-        console.log(this.image2, "img", this.posX, this.posY, this.width, this.height)
         this.ctx.drawImage(this.image2, this.posX, this.posY, this.width, this.height)
 
     }

@@ -19,32 +19,31 @@ class Player {
     }
 
     draw() {
-        // console.log(this.image, this.posX, this.posY, this.width, this.height),
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
     }
 
     setListeners() {
-        document.onkeydown = e => {
-            e.keyCode == 37 && this.posX > this.posY0 ? this.move("left") : null
-            e.keyCode == 39 && this.posX < this.gameWidth - this.width ? this.move("right") : null
-        }
+        document.addEventListener("keydown", e => {
+            console.log(e)
+            switch (e.keyCode) {
+                case this.keys.left:
+                    this.move("left");
+                    break;
+                case this.keys.right:
+                    this.move("right");
+                    break;
+            }
+        });
+
     }
 
-    // setListeners() {
-    //     document.addEventListener("keydown", e => {
-    //         switch (e.keyCode) {
-    //             case this.keys.left:
-    //                 this.posX > this.posY0 ? this.move("left");
-    //             case this.keys.right:
-    //                 this.posX < this.gameWidth - this.width ? this.move("right");
-    //         }
-    //     });
-
-    // }
-
     move(mov) {
-        mov === "right" ? this.posX += this.velY : null
-        mov === "left" ? this.posX -= this.velY : null
+        if (mov === "right" && this.posX < (this.gameWidth - this.width)) {
+            this.posX += this.velY;
+        }
+        if (mov === "left" && this.posX > this.posY0) {
+            this.posX -= this.velY;
+        }
 
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
     }
