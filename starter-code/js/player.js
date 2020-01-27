@@ -1,9 +1,9 @@
 class Player {
     constructor(ctx, gameW, gameH, keys) {
         this.ctx = ctx
-        this.posX = window.innerWidth / 3.1
+        this.posX = window.innerWidth / 3
         this.posY = window.innerHeight / 1.45
-        this.posY0 = this.posY
+        this.posY0 = 0
 
         this.gameWidth = gameW;
         this.gameHeight = gameH;
@@ -12,7 +12,7 @@ class Player {
 
         this.width = 50
         this.height = 60
-        this.velY = 1
+        this.velY = 3
 
         this.keys = keys
         this.setListeners();
@@ -24,16 +24,25 @@ class Player {
     }
 
     setListeners() {
-        console.log("muevete")
         document.onkeydown = e => {
-            e.keyCode == 37 && this.posX <= 600 ? this.move("left") : null
-            e.keyCode == 39 && this.posX > 530 ? this.move("right") : null
+            e.keyCode == 37 && this.posX > this.posY0 ? this.move("left") : null
+            e.keyCode == 39 && this.posX < this.gameWidth - this.width ? this.move("right") : null
         }
     }
 
-    move(mov) {
+    // setListeners() {
+    //     document.addEventListener("keydown", e => {
+    //         switch (e.keyCode) {
+    //             case this.keys.left:
+    //                 this.posX > this.posY0 ? this.move("left");
+    //             case this.keys.right:
+    //                 this.posX < this.gameWidth - this.width ? this.move("right");
+    //         }
+    //     });
 
-        console.log("moveeeeeer")
+    // }
+
+    move(mov) {
         mov === "right" ? this.posX += this.velY : null
         mov === "left" ? this.posX -= this.velY : null
 

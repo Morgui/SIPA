@@ -6,7 +6,7 @@ const game = {
     version: '1.0',
     canvas: undefined,
     ctx: undefined,
-    fps: 60,
+    fps: 50,
     keys: {
         left: 37,
         rigth: 39,
@@ -38,6 +38,7 @@ const game = {
     drawAll() {
         this.background.draw();
         this.player.draw();
+        this.obstacles.drawBlack();
     },
     moveAll() {
         this.player.move();
