@@ -7,6 +7,11 @@ const game = {
     canvas: undefined,
     ctx: undefined,
     fps: 60,
+    keys: {
+        left: 37,
+        rigth: 39,
+        // space: 32
+    },
 
     init() {
         this.canvas = document.getElementById("canvas");
@@ -21,16 +26,20 @@ const game = {
         this.reset();
         this.interval = setInterval(() => {
             this.drawAll();
+            this.moveAll();
 
         }, 1000 / this.fps)
     },
     reset() {
         this.background = new Background(this.ctx, this.width, this.height);
-        this.player = new Player(this.ctx, this.width, this.height);
+        this.player = new Player(this.ctx, this.width, this.height, this.keys);
 
     },
     drawAll() {
         this.background.draw();
         this.player.draw();
+    },
+    moveAll() {
+        this.player.move();
     }
 }
