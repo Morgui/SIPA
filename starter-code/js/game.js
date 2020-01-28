@@ -36,7 +36,7 @@ const game = {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
         this.enemies = this.createEnemies(); //para llamar la función de crear bichitos
-        this.shoots = new Shoots(this.ctx, this.width, this.height)
+        this.shoots = new Shoots(this.ctx, this.player.posX + this.player.width / 2, this.player.posY)
     },
     drawAll() {
         this.background.draw();
