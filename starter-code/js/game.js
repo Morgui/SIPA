@@ -10,7 +10,7 @@ const game = {
     keys: {
         left: 37,
         right: 39,
-        top: 38
+        attack: 38
     },
 
     init() {
@@ -36,7 +36,8 @@ const game = {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
         this.enemies = this.createEnemies(); //para llamar la función de crear bichitos
-        this.shoots = new Shoots(this.ctx, this.player.posX + this.player.width / 2, this.player.posY)
+        // this.shoots = new Shoots(this.ctx, this.player.posX + this.player.width / 2, this.player.posY)
+        this.shoots = [];
     },
     drawAll() {
         this.background.draw();
@@ -44,7 +45,10 @@ const game = {
         this.enemies.forEach(enemy => {
             enemy.draw(); //para pintar todos los bichitos que tengamos en el arr
         });
-        this.shoots.draw();
+
+        this.shoots.forEach(shoot => {
+            shoot.draw();
+        });
 
     },
     moveAll() {
@@ -60,4 +64,5 @@ const game = {
         }
         return enemies;
     }
+    // sacar el array de disparos y si es posible la colision sin muerte
 }

@@ -5,8 +5,6 @@ class Shoots {
         this.posY = posY
         this.width = 3.5
         this.heigth = 10
-
-
     }
     draw() {
         this.posY -= 1;

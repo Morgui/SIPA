@@ -32,7 +32,9 @@ class Player {
                 case this.keys.right:
                     this.move("right");
                     break;
-                    // case this.keys.top:
+                case this.keys.attack:
+                    game.shoots.push(new Shoots(this.ctx, this.posX + this.width / 2, this.posY))
+                    break;
             }
         });
 
