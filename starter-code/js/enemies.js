@@ -1,16 +1,16 @@
 class Enemies {
-    constructor(ctx) {
+    constructor(ctx, posX, posY) {
         this.ctx = ctx
-        this.posX = window.innerWidth / 2 - 200
-        this.posY = 30
+        this.posX = posX
+        this.posY = posY
         this.width = 50;
         this.height = 50;
-        this.image2 = new Image();
-        this.image2.src = "img/enemy2.png";
+        this.image = new Image();
+        this.image.src = "img/enemy.png";
     }
 
     draw() {
-        this.ctx.drawImage(this.image2, this.posX, this.posY, this.width, this.height)
+        this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
 
     }
 }

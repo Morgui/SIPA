@@ -32,6 +32,7 @@ class Player {
                 case this.keys.right:
                     this.move("right");
                     break;
+                    // case this.keys.top:
             }
         });
 
