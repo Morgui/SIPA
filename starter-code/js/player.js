@@ -12,7 +12,7 @@ class Player {
 
         this.width = 50
         this.height = 60
-        this.velY = 3
+        this.velY = 10
 
         this.keys = keys
         this.setListeners();
@@ -24,7 +24,6 @@ class Player {
 
     setListeners() {
         document.addEventListener("keydown", e => {
-            console.log(e)
             switch (e.keyCode) {
                 case this.keys.left:
                     this.move("left");

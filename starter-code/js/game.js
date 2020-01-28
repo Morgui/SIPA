@@ -25,6 +25,8 @@ const game = {
 
         this.start();
     },
+
+    //recuerda el resize
     start() {
         this.reset();
         this.interval = setInterval(() => {
