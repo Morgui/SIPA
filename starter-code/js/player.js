@@ -2,16 +2,16 @@ class Player {
     constructor(ctx, gameW, gameH, keys) {
         this.ctx = ctx
         this.posX = window.innerWidth / 3
-        this.posY = window.innerHeight / 1.45
+        this.posY = window.innerHeight / 1.4
         this.posY0 = 0
 
-        this.gameWidth = gameW;
-        this.gameHeight = gameH;
+        this.gameWidth = gameW
+        this.gameHeight = gameH
         this.image = new Image()
         this.image.src = "img/player.png"
 
-        this.width = 50
-        this.height = 60
+        this.width = 40
+        this.height = 50
         this.velY = 10
 
         this.keys = keys
@@ -32,7 +32,7 @@ class Player {
                     this.move("right");
                     break;
                 case this.keys.attack:
-                    game.shoots.push(new Shoots(this.ctx, this.posX + this.width / 2, this.posY))
+                    this.shoots.push(new Shoots(this.ctx, this.posX + this.width / 2, this.posY))
                     break;
             }
         });

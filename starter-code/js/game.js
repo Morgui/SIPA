@@ -16,30 +16,35 @@ const game = {
     init() {
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
+        this.setDimensions();
+        this.start();
+    },
+
+    start() {
+        this.reset();
+        this.interval = setInterval(() => {
+            this.enemies = this.enemies.filter(enemy => enemy != null)
+            // this.enemies = this.enemies.filter(enemy => enemy.posY < this.height)
+            this.player.shoots = this.player.shoots.filter(shoot => !shoot.destroyed)
+            this.clear();
+            this.drawAll();
+        }, 1000 / this.fps)
+    },
+
+    setDimensions() {
         this.width = window.innerWidth * 0.7;
         this.height = window.innerHeight * 0.93;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.canvasW = this.canvas.width / 3.2;
         this.canvasH = this.canvas.height / 10;
-
-        this.start();
     },
 
-    //recuerda el resize
-    start() {
-        this.reset();
-        this.interval = setInterval(() => {
-            this.drawAll();
-
-        }, 1000 / this.fps)
-    },
     reset() {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
         this.enemies = this.createEnemies(); //para llamar la función de crear bichitos
-        // this.shoots = new Shoots(this.ctx, this.player.posX + this.player.width / 2, this.player.posY)
-        this.shoots = [];
+        this.player.shoots = [];
     },
     drawAll() {
         this.background.draw();
@@ -48,13 +53,13 @@ const game = {
             enemy.draw(); //para pintar todos los bichitos que tengamos en el arr
         });
 
-        this.shoots.forEach(shoot => {
-            shoot.draw();
+        this.player.shoots.forEach(shoot => {
+            shoot.draw(); //para pintar los disparos
         });
 
     },
     moveAll() {
-        this.player.move();
+        //esto movera a los marcianos automaticamente
     },
 
     createEnemies() {
@@ -65,6 +70,19 @@ const game = {
             }
         }
         return enemies;
-    }
-    // sacar el array de disparos y si es posible la colision sin muerte
+    },
+
+    playerCollision() {
+        // funcion para comprobar colisiones
+
+        return this.enemies.some(
+            enemy =>
+            this.player.posX + this.player.width >= enemy.posX &&
+            this.player.posY + this.player.height >= enemy.posY &&
+            this.player.posX <= enemy.posX + enemy.width
+        );
+    },
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
 }
