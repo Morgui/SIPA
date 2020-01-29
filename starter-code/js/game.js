@@ -12,6 +12,8 @@ const game = {
         right: 39,
         attack: 38
     },
+    enemies: [],
+    framesCounter: 0,
 
     init() {
         this.canvas = document.getElementById("canvas");
@@ -24,8 +26,14 @@ const game = {
         this.reset();
         this.interval = setInterval(() => {
             this.enemies = this.enemies.filter(enemy => enemy != null)
-            // this.enemies = this.enemies.filter(enemy => enemy.posY < this.height)
             this.player.shoots = this.player.shoots.filter(shoot => !shoot.destroyed)
+            if (this.playerCollision()) {
+                this.gameOver()
+            }
+            this.framesCounter++
+            if (this.framesCounter % 800 === 0) {
+                this.createEnemies()
+            }
             this.clear();
             this.drawAll();
         }, 1000 / this.fps)
@@ -43,7 +51,7 @@ const game = {
     reset() {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
-        this.enemies = this.createEnemies(); //para llamar la función de crear bichitos
+        this.createEnemies(); //para llamar la función de crear bichitos
         this.player.shoots = [];
     },
     drawAll() {
@@ -63,24 +71,28 @@ const game = {
     },
 
     createEnemies() {
-        let enemies = [];
         for (let j = 0; j <= 1; j++) {
             for (let i = 0; i <= 4; i++) {
-                enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, this.canvasH + j * 100))
+                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, this.canvasH + j * 100))
             }
         }
-        return enemies;
+
     },
 
     playerCollision() {
         // funcion para comprobar colisiones
-
         return this.enemies.some(
-            enemy =>
-            this.player.posX + this.player.width >= enemy.posX &&
-            this.player.posY + this.player.height >= enemy.posY &&
-            this.player.posX <= enemy.posX + enemy.width
+            enemy => {
+
+                return this.player.posX + this.player.width >= enemy.posX &&
+                    this.player.posY + this.player.height >= enemy.posY &&
+                    this.player.posX <= enemy.posX + enemy.width &&
+                    this.player.posY <= enemy.posY + enemy.height
+            }
         );
+    },
+    gameOver() {
+        clearInterval(this.interval);
     },
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
