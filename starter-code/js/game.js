@@ -35,8 +35,6 @@ const game = {
             if (this.framesCounter % 800 === 0) {
                 this.createEnemies()
             }
-            // if (this.enemies != null) NO FUNCIOOOONAAA xD
-            // this.score++
             this.clear();
             this.drawAll();
         }, 1000 / this.fps)
@@ -54,7 +52,7 @@ const game = {
     reset() {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
-        this.createEnemies(); //para llamar la función de crear bichitos
+        this.createEnemies();
         this.player.shoots = [];
         this.scoreboard = ScoreBoard;
         this.scoreboard.init(this.ctx);
@@ -64,11 +62,11 @@ const game = {
         this.background.draw();
         this.player.draw();
         this.enemies.forEach(enemy => {
-            enemy.draw(); //para pintar todos los bichitos que tengamos en el arr
+            enemy.draw();
         });
 
         this.player.shoots.forEach(shoot => {
-            shoot.draw(); //para pintar los disparos
+            shoot.draw();
         });
         this.drawScore();
     },
@@ -86,7 +84,7 @@ const game = {
     },
 
     playerCollision() {
-        // funcion para comprobar colisiones
+        // funcion para comprobar colisiones con el player
         return this.enemies.some(
             enemy => {
 
@@ -99,9 +97,9 @@ const game = {
     },
     gameOver() {
         clearInterval(this.interval);
+        alert(`GAME OVER!! Your Score was: ${this.score}`)
     },
     drawScore() {
-        //con esta funcion pintamos el marcador
         this.scoreboard.update(this.score);
     },
     clear() {

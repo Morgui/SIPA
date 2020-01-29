@@ -13,16 +13,15 @@ class Shoots {
         this.checkCollision()
     }
     checkCollision() { //comprobar si hay un enemigo cerca con el que se pueda hacer colisión
-        // console.log("comprobando")
         for (let i = 0; i < game.enemies.length; i++) {
             let enemy = game.enemies[i];
             //para destruir al enemigo si lo encuentra, los marca como null 
             if (this.collision(enemy)) {
                 game.enemies[i] = null;
                 this.destroyed = true
+                game.score += 10
             }
         }
-        //para quitar los enemigos sustituidos por null de la lista, porque murieron
     }
     collision(enemy) {
         // console.log(this.posX <= enemy.posX + 35)
