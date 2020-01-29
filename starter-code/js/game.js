@@ -14,6 +14,7 @@ const game = {
     },
     enemies: [],
     framesCounter: 0,
+    score: undefined,
 
     init() {
         this.canvas = document.getElementById("canvas");
@@ -34,6 +35,8 @@ const game = {
             if (this.framesCounter % 800 === 0) {
                 this.createEnemies()
             }
+            // if (this.enemies != null) NO FUNCIOOOONAAA xD
+            // this.score++
             this.clear();
             this.drawAll();
         }, 1000 / this.fps)
@@ -53,6 +56,9 @@ const game = {
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
         this.createEnemies(); //para llamar la función de crear bichitos
         this.player.shoots = [];
+        this.scoreboard = ScoreBoard;
+        this.scoreboard.init(this.ctx);
+        this.score = 0;
     },
     drawAll() {
         this.background.draw();
@@ -64,7 +70,7 @@ const game = {
         this.player.shoots.forEach(shoot => {
             shoot.draw(); //para pintar los disparos
         });
-
+        this.drawScore();
     },
     moveAll() {
         //esto movera a los marcianos automaticamente
@@ -93,6 +99,10 @@ const game = {
     },
     gameOver() {
         clearInterval(this.interval);
+    },
+    drawScore() {
+        //con esta funcion pintamos el marcador
+        this.scoreboard.update(this.score);
     },
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
