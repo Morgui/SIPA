@@ -15,21 +15,24 @@ const game = {
     enemies: [],
     framesCounter: 0,
     score: 0,
+    isRunning: false,
+    randomVel: 0,
 
     init() {
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
         this.setDimensions();
         this.start();
+        this.isRunning = true;
     },
 
     start() {
         this.reset();
         this.interval = setInterval(() => {
             this.enemies = this.enemies.filter(enemy => enemy != null)
-            this.player.shoots = this.player.shoots.filter(shoot => !shoot.destroyed)
+            this.player._shoots = this.player._shoots.filter(shoot => !shoot._destroyed)
             this.framesCounter++
-            if (this.framesCounter % 700 === 0) {
+            if (this.framesCounter % 600 === 0) {
                 this.createEnemies()
             }
             this.clear();
@@ -57,10 +60,9 @@ const game = {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.width, this.height, this.keys);
         this.createEnemies();
-        this.player.shoots = [];
         this.scoreboard = ScoreBoard;
         this.scoreboard.init(this.ctx);
-        this.audio = new Audio("./music/space_heroes.mp3");
+        this.audio = new Audio("./music/final_space.mp3");
     },
 
     drawAll() {
@@ -70,20 +72,18 @@ const game = {
             enemy.draw();
         });
 
-        this.player.shoots.forEach(shoot => {
+        this.player._shoots.forEach(shoot => {
             shoot.draw();
         });
         this.drawScore();
     },
 
     createEnemies() {
-        let randomVel = 1 //DEBE DE ESTAR COMO PROPIEDAD DEL OBJETO
         for (let j = 0; j <= 1; j++) {
-            randomVel = Math.floor(Math.random() * 10);
-
+            this.randomVel = Math.floor(Math.random() * 6);
             for (let i = 0; i <= 4; i++) {
 
-                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, this.canvasH + j * 100, randomVel))
+                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, -100 + this.canvasH + j * 100, this.randomVel))
             }
         }
 
@@ -94,10 +94,10 @@ const game = {
         return this.enemies.some(
             enemy => {
 
-                return this.player.posX + this.player.width >= enemy.posX &&
-                    this.player.posY + this.player.height >= enemy.posY &&
-                    this.player.posX <= enemy.posX + enemy.width &&
-                    this.player.posY <= enemy.posY + enemy.height
+                return this.player._posX + this.player._width >= enemy._posX &&
+                    this.player._posY + this.player._height >= enemy._posY &&
+                    this.player._posX <= enemy._posX + enemy._width &&
+                    this.player._posY <= enemy._posY + enemy._height
             }
         );
     },
@@ -117,7 +117,6 @@ const game = {
         this.ctx.fillText("GAME OVER", this.canvasW, this.height / 2)
 
         clearInterval(this.interval);
-        // alert(`GAME OVER!! Your Score was: ${this.score}`)
     },
 
     drawScore() {

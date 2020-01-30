@@ -1,13 +1,13 @@
 const ScoreBoard = {
-  ctx: undefined,
+  _ctx: undefined,
 
   init: function (ctx) {
-    this.ctx = ctx
-    this.ctx.font = "30px sans-serif"
+    this._ctx = ctx
+    this._ctx.font = "30px sans-serif"
   },
 
   update: function (score) {
-    this.ctx.fillStyle = "white";
-    this.ctx.fillText(Math.floor(score), 50, 50);
+    this._ctx.fillStyle = "white";
+    this._ctx.fillText(Math.floor(score), 50, 50);
   }
 };

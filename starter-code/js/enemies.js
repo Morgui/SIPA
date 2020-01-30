@@ -1,33 +1,31 @@
 class Enemies {
     constructor(ctx, posX, posY, velX) {
-        this.ctx = ctx
-        this.posX = posX
-        this.posY = posY
-        this.velY = 0.3
-        this.velX = velX
-        this.width = 35;
-        this.height = 35;
-        this.image = new Image();
-        this.image.src = "img/enemy.png";
+        this._ctx = ctx
+        this._posX = posX
+        this._posY = posY
+        this._velY = 0.3
+        this._velX = velX
+        this._width = 35;
+        this._height = 35;
+        this._image = new Image();
+        this._image.src = "img/enemy.png";
 
     }
 
     draw() {
-        this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
+        this._ctx.drawImage(this._image, this._posX, this._posY, this._width, this._height)
         this.move()
     }
 
     move() {
-        this.posY += this.velY;
-        console.log(this.posX)
-        this.posX -= this.velX
-        console.log(this.posX)
+        this._posY += this._velY;
+        this._posX -= this._velX
 
-        if (this.posX <= 0) {
-            this.velX *= -1
+        if (this._posX <= 0) {
+            this._velX *= -1
         }
-        if (this.posX + this.width >= game.canvas.width) {
-            this.velX *= -1
+        if (this._posX + this._width >= game.canvas.width) {
+            this._velX *= -1
         }
 
     }
