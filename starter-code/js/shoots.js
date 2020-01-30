@@ -14,7 +14,7 @@ class Shoots {
     }
     checkCollision() { //comprobar si hay un enemigo cerca con el que se pueda hacer colisión
         for (let i = 0; i < game.enemies.length; i++) {
-            let enemy = game.enemies[i];
+            let enemy = game.enemies[i]; //NO DEBE ESTAR AQUí
             //para destruir al enemigo si lo encuentra, los marca como null 
             if (this.collision(enemy)) {
                 game.enemies[i] = null;
@@ -22,7 +22,7 @@ class Shoots {
                 game.score += 10
             }
         }
-        
+
     }
     collision(enemy) {
         // console.log(this.posX <= enemy.posX + 35)

@@ -28,15 +28,19 @@ const game = {
         this.interval = setInterval(() => {
             this.enemies = this.enemies.filter(enemy => enemy != null)
             this.player.shoots = this.player.shoots.filter(shoot => !shoot.destroyed)
-            if (this.playerCollision()) {
-                this.gameOver()
-            }
             this.framesCounter++
-            if (this.framesCounter % 800 === 0) {
+            if (this.framesCounter % 700 === 0) {
                 this.createEnemies()
             }
             this.clear();
             this.drawAll();
+            if (this.playerCollision()) {
+                this.gameOver()
+            }
+            if (this.score >= 800) {
+                this.win()
+            }
+            this.audio.play()
         }, 1000 / this.fps)
     },
 
@@ -56,7 +60,9 @@ const game = {
         this.player.shoots = [];
         this.scoreboard = ScoreBoard;
         this.scoreboard.init(this.ctx);
+        this.audio = new Audio("./music/space_heroes.mp3");
     },
+
     drawAll() {
         this.background.draw();
         this.player.draw();
@@ -69,10 +75,15 @@ const game = {
         });
         this.drawScore();
     },
+
     createEnemies() {
+        let randomVel = 1 //DEBE DE ESTAR COMO PROPIEDAD DEL OBJETO
         for (let j = 0; j <= 1; j++) {
+            randomVel = Math.floor(Math.random() * 10);
+
             for (let i = 0; i <= 4; i++) {
-                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, this.canvasH + j * 100))
+
+                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, this.canvasH + j * 100, randomVel))
             }
         }
 
@@ -90,13 +101,29 @@ const game = {
             }
         );
     },
-    gameOver() {
+
+    win() {
+        this.ctx.font = 'bold 56px serif';
+        this.ctx.fillStyle = "#27718d"
+        this.ctx.fillText("YOU WIN!!", this.canvasW, this.height / 2)
+
         clearInterval(this.interval);
-        alert(`GAME OVER!! Your Score was: ${this.score}`)
     },
+
+    gameOver() {
+
+        this.ctx.font = 'bold 56px serif';
+        this.ctx.fillStyle = "red"
+        this.ctx.fillText("GAME OVER", this.canvasW, this.height / 2)
+
+        clearInterval(this.interval);
+        // alert(`GAME OVER!! Your Score was: ${this.score}`)
+    },
+
     drawScore() {
         this.scoreboard.update(this.score);
     },
+
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
