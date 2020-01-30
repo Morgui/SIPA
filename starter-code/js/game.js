@@ -14,7 +14,7 @@ const game = {
     },
     enemies: [],
     framesCounter: 0,
-    score: undefined,
+    score: 0,
 
     init() {
         this.canvas = document.getElementById("canvas");
@@ -56,7 +56,6 @@ const game = {
         this.player.shoots = [];
         this.scoreboard = ScoreBoard;
         this.scoreboard.init(this.ctx);
-        this.score = 0;
     },
     drawAll() {
         this.background.draw();
@@ -70,10 +69,6 @@ const game = {
         });
         this.drawScore();
     },
-    moveAll() {
-        //esto movera a los marcianos automaticamente
-    },
-
     createEnemies() {
         for (let j = 0; j <= 1; j++) {
             for (let i = 0; i <= 4; i++) {

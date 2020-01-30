@@ -22,6 +22,7 @@ class Shoots {
                 game.score += 10
             }
         }
+        
     }
     collision(enemy) {
         // console.log(this.posX <= enemy.posX + 35)
