@@ -32,7 +32,7 @@ const game = {
             this.enemies = this.enemies.filter(enemy => enemy != null)
             this.player._shoots = this.player._shoots.filter(shoot => !shoot._destroyed)
             this.framesCounter++
-            if (this.framesCounter % 600 === 0) {
+            if (this.framesCounter % 500 === 0) {
                 this.createEnemies()
             }
             this.clear();
@@ -83,7 +83,7 @@ const game = {
             this.randomVel = Math.floor(Math.random() * 6);
             for (let i = 0; i <= 4; i++) {
 
-                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, -100 + this.canvasH + j * 100, this.randomVel))
+                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, -90 + this.canvasH + j * 100, this.randomVel))
             }
         }
 
