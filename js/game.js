@@ -17,7 +17,7 @@ const game = {
     score: 0,
     isRunning: false,
     randomVel: 0,
-    winningScore: 200,
+    winningScore: 800,
 
     init() {
         this.canvas = document.getElementById("canvas");
