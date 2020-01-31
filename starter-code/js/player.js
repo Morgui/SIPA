@@ -14,6 +14,7 @@ class Player {
         this._height = 50
         this._velY = 10
         this._shoots = [];
+        this.shotAudio = new Audio("./music/retro_shot.wav")
 
         this._keys = keys
         this.setListeners();
@@ -27,14 +28,17 @@ class Player {
         document.addEventListener("keydown", e => {
             switch (e.keyCode) {
                 case this._keys.left:
-                    this.move("left");
+                    console.log(game.isRunning)
+                    game.isRunning ? this.move("left") : null;
                     break;
                 case this._keys.right:
-                    this.move("right");
+                    game.isRunning ? this.move("right") : null;
                     break;
                 case this._keys.attack:
-                    this._shoots.push(new Shoots(this._ctx, this._posX + this._width / 2, this._posY))
-                    game.shotAudio.play()
+                    if (game.isRunning) {
+                        this._shoots.push(new Shoots(this._ctx, this._posX + this._width / 2, this._posY))
+                        this.shotAudio.play()
+                    }
                     break;
             }
         });

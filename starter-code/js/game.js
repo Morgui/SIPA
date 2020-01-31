@@ -17,13 +17,14 @@ const game = {
     score: 0,
     isRunning: false,
     randomVel: 0,
+    winningScore: 200,
 
     init() {
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
         this.setDimensions();
-        this.start();
         this.isRunning = true;
+        this.start();
     },
 
     start() {
@@ -40,7 +41,7 @@ const game = {
             if (this.playerCollision()) {
                 this.gameOver()
             }
-            if (this.score >= 200) {
+            if (this.score >= this.winningScore) {
                 this.win()
             }
             this.audio.play()
@@ -63,7 +64,6 @@ const game = {
         this.scoreboard = ScoreBoard;
         this.scoreboard.init(this.ctx);
         this.audio = new Audio("./music/final_space.mp3");
-        this.shotAudio = new Audio("./music/retro_shot.wav")
     },
 
     drawAll() {
@@ -107,6 +107,7 @@ const game = {
         this.ctx.font = 'bold 56px serif';
         this.ctx.fillStyle = "#27718d"
         this.ctx.fillText("YOU WIN!!", this.canvasW, this.height / 2)
+        this.isRunning = false
 
         clearInterval(this.interval);
     },
@@ -116,8 +117,10 @@ const game = {
         this.ctx.font = 'bold 56px serif';
         this.ctx.fillStyle = "red"
         this.ctx.fillText("GAME OVER", this.canvasW, this.height / 2)
+        this.isRunning = false
 
         clearInterval(this.interval);
+
     },
 
     drawScore() {
