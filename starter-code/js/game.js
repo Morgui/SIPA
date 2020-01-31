@@ -40,7 +40,7 @@ const game = {
             if (this.playerCollision()) {
                 this.gameOver()
             }
-            if (this.score >= 800) {
+            if (this.score >= 200) {
                 this.win()
             }
             this.audio.play()
@@ -83,7 +83,7 @@ const game = {
             this.randomVel = Math.floor(Math.random() * 6);
             for (let i = 0; i <= 4; i++) {
 
-                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, -90 + this.canvasH + j * 100, this.randomVel))
+                this.enemies.push(new Enemies(this.ctx, this.canvasW + i * 80, -85 + this.canvasH + j * 100, this.randomVel))
             }
         }
 

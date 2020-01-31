@@ -27,7 +27,6 @@ class Shoots {
 
     }
     collision(enemy) {
-        // console.log(this._posX <= enemy._posX + 35)
         //si la pos de la bala esta cerca de la pos del enemigo más su ancho/altura, colisionará
         return (
             this._posX >= enemy._posX &&

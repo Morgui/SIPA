@@ -24,7 +24,7 @@ img {
 
 body button {
     font-size: 30px;
-    background-color: #3d2e78;
+    background-color: #4d3e86;
     color: #fff;
     padding: 20px 40px;
     border: 0;
@@ -39,7 +39,7 @@ button {
 }
 
 button:hover {
-    background-color: #504285;
+    background-color: #3d2e78;
     color: #fff;
     transform: scale(1.1);
 }
