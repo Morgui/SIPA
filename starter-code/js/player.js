@@ -34,6 +34,7 @@ class Player {
                     break;
                 case this._keys.attack:
                     this._shoots.push(new Shoots(this._ctx, this._posX + this._width / 2, this._posY))
+                    game.shotAudio.play()
                     break;
             }
         });

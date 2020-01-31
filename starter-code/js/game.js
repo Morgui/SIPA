@@ -63,6 +63,7 @@ const game = {
         this.scoreboard = ScoreBoard;
         this.scoreboard.init(this.ctx);
         this.audio = new Audio("./music/final_space.mp3");
+        this.shotAudio = new Audio("./music/retro_shot.wav")
     },
 
     drawAll() {
