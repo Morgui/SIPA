@@ -1,6 +1,7 @@
 # SIPA
 
 SIPA es el primer proyecto que realicé durante mi bootcamp de Full Stack Web Dev en Ironhack. Después de estar las 3 primeras semanas aprendiendo los fundamentos de la programación en javascript, tuvimos una semana para desarrollar un juego.
+Te animo a que lo pruebes [SIPA](https://morgui.github.io/SIPA/)
 
 ### Realizado con
 
